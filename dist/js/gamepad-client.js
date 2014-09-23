@@ -296,6 +296,13 @@ bindKeyPresses('keyup', false);
 module.exports = function (window, document) {
 'use strict';
 
+if (!window) {
+  throw new Error('window required');
+}
+if (!document) {
+  throw new Error('document required');
+}
+
 function trace(text, level) {
   console[level || 'log'](
     (window.performance.now() / 1000).toFixed(3) + ': ' + text);
@@ -355,6 +362,7 @@ function hasTouchEvents() {
 }
 
 function injectCSS(opts) {
+  console.log('link');
   var link = document.createElement('link');
   link.href = opts.href;
   link.media = 'all';
